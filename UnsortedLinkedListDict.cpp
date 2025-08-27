@@ -1,7 +1,8 @@
 #include "UnsortedLinkedListDict.hpp"
-void UnsortedLinkedListDict::insert(int)
+void UnsortedLinkedListDict::insert(int key)
 {
     Node newNode;
+
     newNode.next = head;
     newNode.data = key;
     head = &newNode;

@@ -12,6 +12,38 @@ std::size_t SortedVectorDict::size()
 void SortedVectorDict::insert(int key)
 {
 
+    // push key to end of vector
+    // set i = data.size()-1 //end of the vector;
+
+    // if vector was empty, or key > data[i]
+    //    just return since its already at the end :)
+
+    // otherwise:
+    //
+    //   move key from the end of the vector to the front until both:
+    //       A: i = 0
+    //       B: data[i-1] < key //the next value is less than key
+
+    // to move key down the vector:
+    //      move data[i] -> temp
+    //      move key -> data[i]
+    //      move temp -> data[i+1];
+
+    data.push_back(key);
+    int i = data.size() - 1;
+    int temp;
+
+    if (i == 0 || key > data[i - 1]) {
+        return;
+    } else {
+        while (i != 0 && data[i - 1] > key) {
+            temp = data[i - 1];
+            data[i - 1] = key;
+            data[i] = temp;
+            i--;
+        }
+    }
+
     /*add key to end of vector
      * while key is less than vector[vector.length-i]
      *      swap
@@ -19,39 +51,39 @@ void SortedVectorDict::insert(int key)
      *
      */
 
-    auto i = data.size();
-    // std::cout << i << std::endl;
-    if (data.empty()) {
-        data.push_back(key);
-    } else {
-
-        int temp = data[i - 1];
-
-        data.push_back(key);
-        //   std::cout << "data[i]:" << data[i - 1] << "  key:" << key << "   key > data[i]" << (key > data[i - 1]) << std::endl;
-
-        /*while key is greater than the current index
-         * swap key and current index
-         * temp =  current index
-         * current index + 1 = the location of key
-         */
-
-        while (key > temp && i > 1) {
-            // std::cout << i;
-            temp = data[i - 1];
-            data[i - 1] = key;
-            data[i] = temp;
-            i--;
-            // temp = data[i];
-            // std::cout << std::endl
-            //           << "sort" << std::endl;
-            // //  data[i] = data[i + 1];
-            // data[i + 1] = temp;
-            // i--;
-            // std::cout << key << std::endl;
-        }
-        // std::cout << "boop";
-    }
+    // auto i = data.size();
+    // // std::cout << i << std::endl;
+    // if (data.empty()) {
+    //     data.push_back(key);
+    // } else {
+    //
+    //     int temp = data[i - 1];
+    //
+    //     data.push_back(key);
+    //     //   std::cout << "data[i]:" << data[i - 1] << "  key:" << key << "   key > data[i]" << (key > data[i - 1]) << std::endl;
+    //
+    //     /*while key is greater than the current index
+    //      * swap key and current index
+    //      * temp =  current index
+    //      * current index + 1 = the location of key
+    //      */
+    //
+    //     while (key > temp && i > 1) {
+    //         // std::cout << i;
+    //         temp = data[i - 1];
+    //         data[i - 1] = key;
+    //         data[i] = temp;
+    //         i--;
+    //         // temp = data[i];
+    //         // std::cout << std::endl
+    //         //           << "sort" << std::endl;
+    //         // //  data[i] = data[i + 1];
+    //         // data[i + 1] = temp;
+    //         // i--;
+    //         // std::cout << key << std::endl;
+    //     }
+    //     // std::cout << "boop";
+    // }
 }
 
 bool SortedVectorDict::lookup(int key) const
